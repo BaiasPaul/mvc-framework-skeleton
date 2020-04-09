@@ -32,8 +32,7 @@ abstract class AbstractController
 
     /**
      * @param $session
-     * @return Message|MessageInterfaceEverything up-to-date
-
+     * @return Message|MessageInterface
      */
     public function verifySessionUserName($session)
     {
