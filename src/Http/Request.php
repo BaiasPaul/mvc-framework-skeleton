@@ -89,11 +89,12 @@ class Request extends Message implements RequestInterface
 
     /**
      * @param string $name
+     * @param null $default
      * @return mixed
      */
-    public function getParameter(string $name)
+    public function getParameter(string $name, $default = null)
     {
-        return $this->parameters[$name];
+        return array_key_exists($name, $this->getParameters()) ? $this->parameters['name'] : $default;
     }
 
     /**
