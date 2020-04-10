@@ -89,8 +89,8 @@ class Request extends Message implements RequestInterface
 
     /**
      * @param string $name
-     * @param null $default
-     * @return mixed
+     * @param mixed|null $default
+     * @return mixed|null
      */
     public function getParameter(string $name, $default = null)
     {
