@@ -13,14 +13,19 @@ class UrlBuilder
      * Build a query parameter string
      *
      * @param array $queryParameters
+     * @param array $changedParameters
      * @return string
      */
-    public function getUrl(array $queryParameters): string
+    public function getUrl(array $queryParameters,array $changedParameters = []): string
     {
+        $aux = $queryParameters;
         $resultString = '?';
-        foreach ($queryParameters as $name => $value) {
-            if ($value !== '') {
-                $resultString .= "$name=$value&";
+        foreach ($aux as $name => $value) {
+            if (!empty($changedParameters) && isset($changedParameters[$name])){
+                $aux[$name] = $changedParameters[$name];
+            }
+            if ($aux[$name] !== '') {
+                $resultString .= "$name=$aux[$name]&";
             }
         }
 
