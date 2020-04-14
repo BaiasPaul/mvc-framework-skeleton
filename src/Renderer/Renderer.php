@@ -5,6 +5,7 @@ namespace Framework\Renderer;
 use Framework\Contracts\RendererInterface;
 use Framework\Http\Response;
 use Framework\Http\Stream;
+use Framework\Service\UrlBuilder;
 
 class Renderer implements RendererInterface
 {
@@ -17,12 +18,21 @@ class Renderer implements RendererInterface
     private $baseViewsPath;
 
     /**
+     * @var UrlBuilder
+     */
+    private $urlBuilder;
+
+    /**
      * Renderer constructor.
      * @param string $baseViewsPath
+     * @param UrlBuilder $urlBuilder
      */
-    public function __construct(string $baseViewsPath)
-    {
+    public function __construct(
+        string $baseViewsPath,
+        UrlBuilder $urlBuilder
+    ) {
         $this->baseViewsPath = $baseViewsPath;
+        $this->urlBuilder = $urlBuilder;
     }
 
     /**
@@ -35,6 +45,8 @@ class Renderer implements RendererInterface
         $fullPath = $this->baseViewsPath . $viewFile;
 
         ob_start();
+
+        $arguments['url'] = $this->urlBuilder;
 
         extract($arguments);
 
