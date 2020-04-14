@@ -16,6 +16,7 @@ class UrlBuilder
      * @param array $changedParameters
      * @return string
      */
+
     public function getUrl(array $queryParameters,array $changedParameters = []): string
     {
         $aux = $queryParameters;
@@ -27,8 +28,20 @@ class UrlBuilder
             if ($aux[$name] !== '') {
                 $resultString .= "$name=$aux[$name]&";
             }
+            if ($value != ''){
+                $aux[$name] = $value;
+            }
+            if ($changedParameters[$name] != '') {
+                $aux[$name] = $changedParameters[$name];
+            }
+        }
+        if (http_build_query($aux) == '') {
+            return '';
         }
 
-        return substr($resultString, 0, -1);
+        return '?' . http_build_query($aux);
     }
 }
+
+
+
