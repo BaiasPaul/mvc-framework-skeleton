@@ -24,9 +24,6 @@ class UrlBuilder
             if (!empty($changedParameters) && isset($changedParameters[$name])){
                 $aux[$name] = $changedParameters[$name];
             }
-            if ($aux[$name] !== '') {
-                $resultString .= "$name=$aux[$name]&";
-            }
             if ($value != ''){
                 $aux[$name] = $value;
             }
