@@ -16,19 +16,19 @@ class UrlBuilder
      * @param array $changedParameters
      * @return string
      */
-    public function getUrl(array $queryParameters,array $changedParameters = []): string
+    public function getUrl(array $queryParameters, array $changedParameters = []): string
     {
         $aux = $queryParameters;
         $resultString = '?';
         foreach ($aux as $name => $value) {
-            if (!empty($changedParameters) && isset($changedParameters[$name])){
+            if (isset($changedParameters[$name])) {
                 $aux[$name] = $changedParameters[$name];
             }
             if ($aux[$name] !== '') {
-                $resultString .= "$name=$aux[$name]&";
+                $resultString = ($resultString == '?') ? sprintf('?%s=%s', $name, $aux[$name]) : sprintf('%s&%s=%s', $resultString, $name, $aux[$name]) ;
             }
         }
 
-        return substr($resultString, 0, -1);
+        return $resultString;
     }
 }
