@@ -16,12 +16,17 @@ class UrlBuilder
      * @param array $changedParameters
      * @return string
      */
-    public function getUrl(array $queryParameters, array $changedParameters = []): string
+
+    public function getUrl(array $queryParameters,array $changedParameters = []): string
     {
-        $aux = [];
-        foreach ($queryParameters as $name => $value) {
-            if ($value != '' && isset($changedParameters[$name]) && $changedParameters[$name] == ''){
-                continue;
+        $aux = $queryParameters;
+        $resultString = '?';
+        foreach ($aux as $name => $value) {
+            if (!empty($changedParameters) && isset($changedParameters[$name])){
+                $aux[$name] = $changedParameters[$name];
+            }
+            if ($aux[$name] !== '') {
+                $resultString .= "$name=$aux[$name]&";
             }
             if ($value != ''){
                 $aux[$name] = $value;
