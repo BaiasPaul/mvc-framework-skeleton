@@ -30,9 +30,13 @@ class UrlBuilder
                 $aux[$name] = $changedParameters[$name];
             }
         }
-        if (http_build_query($aux) == '')
+        if (http_build_query($aux) == '') {
             return '';
+        }
 
         return '?' . http_build_query($aux);
     }
 }
+
+
+
