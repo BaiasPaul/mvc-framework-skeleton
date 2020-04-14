@@ -16,7 +16,6 @@ class UrlBuilder
      * @param array $changedParameters
      * @return string
      */
-
     public function getUrl(array $queryParameters,array $changedParameters = []): string
     {
         $aux = $queryParameters;
@@ -42,6 +41,3 @@ class UrlBuilder
         return '?' . http_build_query($aux);
     }
 }
-
-
-
