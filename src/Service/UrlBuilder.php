@@ -18,11 +18,10 @@ class UrlBuilder
      */
     public function getUrl(array $queryParameters,array $changedParameters = []): string
     {
-        $aux = $queryParameters;
-        $resultString = '?';
-        foreach ($aux as $name => $value) {
-            if (!empty($changedParameters) && isset($changedParameters[$name])){
-                $aux[$name] = $changedParameters[$name];
+        $aux = [];
+        foreach ($queryParameters as $name => $value) {
+            if ($value != '' && isset($changedParameters[$name]) && $changedParameters[$name] == ''){
+                continue;
             }
             if ($value != ''){
                 $aux[$name] = $value;
